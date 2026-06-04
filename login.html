@@ -1,204 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login – Sarriette</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    :root {
-      --gold: #C8952A; --gold-light: #E8B547;
-      --dark: #1A1208; --dark-2: #2C1F0E;
-      --cream: #FDF6E9; --white: #fff;
-      --danger: #e74c3c; --text: #3D2C14;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Lato', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1208 0%, #2c1f0e 100%);
       min-height: 100vh;
       display: flex;
-      background: var(--dark);
-      overflow: hidden;
+      justify-content: center;
+      align-items: center;
     }
-    .login-left {
-      flex: 1;
-      background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80') center/cover;
-      position: relative;
-      display: flex; align-items: flex-end;
-      padding: 48px;
-    }
-    .login-left-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(26,18,8,0.7), rgba(26,18,8,0.9));
-    }
-    .login-left-content { position: relative; z-index: 1; }
-    .brand-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px; font-weight: 900; color: var(--gold);
-      display: block; line-height: 1;
-    }
-    .brand-tagline {
-      font-family: 'Dancing Script', cursive;
-      color: rgba(255,255,255,0.7); font-size: 18px;
-      display: block; margin-bottom: 20px;
-    }
-    .login-left-content p { color: rgba(255,255,255,0.5); font-size: 14px; }
-    .login-right {
-      width: 480px; flex-shrink: 0;
-      background: var(--cream);
-      display: flex; align-items: center; justify-content: center;
+
+    .login-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 420px;
       padding: 40px;
+      text-align: center;
     }
-    .login-box { width: 100%; }
-    .login-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px; font-weight: 900; color: var(--gold);
-      text-align: center; display: block; margin-bottom: 4px;
+
+    .logo {
+      font-size: 48px;
+      font-weight: bold;
+      color: #C8952A;
+      margin-bottom: 10px;
     }
-    .login-subtitle {
-      text-align: center; color: #7a6040; font-size: 14px;
-      margin-bottom: 36px;
-      padding-bottom: 24px; border-bottom: 2px solid #f0e0c0;
+
+    h2 {
+      color: #1a1208;
+      margin-bottom: 8px;
+      font-size: 24px;
     }
-    .login-subtitle i { color: var(--gold); margin-right: 6px; }
-    .form-group { margin-bottom: 20px; }
-    label { display: block; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: 0.5px; }
-    .input-wrap { position: relative; }
-    .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #b09060; font-size: 16px; }
+
+    .subtitle {
+      color: #7a6040;
+      font-size: 14px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #f0e0c0;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3D2C14;
+      margin-bottom: 6px;
+    }
+
     input {
-      width: 100%; padding: 13px 16px 13px 44px;
-      border: 2px solid #e8d8b8; border-radius: 10px;
-      font-size: 15px; color: var(--text);
-      background: var(--white); outline: none;
-      font-family: 'Lato', sans-serif;
-      transition: border-color 0.2s;
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e8d8b8;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
     }
-    input:focus { border-color: var(--gold); }
-    .show-pw {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      cursor: pointer; color: #b09060; font-size: 16px; background: none; border: none;
-      left: auto;
+
+    input:focus {
+      border-color: #C8952A;
     }
-    .btn-login {
-      width: 100%; padding: 14px;
-      background: var(--gold); color: var(--dark);
-      border: none; border-radius: 40px;
-      font-family: 'Lato', sans-serif;
-      font-size: 15px; font-weight: 700;
-      cursor: pointer; transition: all 0.3s;
-      letter-spacing: 0.5px; margin-top: 8px;
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #C8952A;
+      color: #1a1208;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
     }
-    .btn-login:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(200,149,42,0.4); }
+
+    button:hover {
+      background: #b07d1a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(200, 149, 42, 0.3);
+    }
+
     .error-msg {
-      background: #fdecea; border-left: 4px solid var(--danger);
-      color: var(--danger); padding: 12px 16px; border-radius: 0 8px 8px 0;
-      font-size: 14px; margin-bottom: 20px; display: none;
+      background: #fdecea;
+      border-left: 4px solid #e74c3c;
+      color: #e74c3c;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
     }
+
     .back-link {
-      text-align: center; margin-top: 24px;
+      margin-top: 20px;
     }
-    .back-link a { color: #b09060; font-size: 13px; text-decoration: none; transition: color 0.2s; }
-    .back-link a:hover { color: var(--gold); }
-    .back-link a i { margin-right: 4px; }
-    @media (max-width: 768px) {
-      .login-left { display: none; }
-      .login-right { width: 100%; }
+
+    .back-link a {
+      color: #b09060;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .back-link a:hover {
+      color: #C8952A;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+      font-size: 12px;
+      color: #999;
     }
   </style>
 </head>
 <body>
-  <div class="login-left">
-    <div class="login-left-overlay"></div>
-    <div class="login-left-content">
-      <span class="brand-name">Sarriette</span>
-      <span class="brand-tagline">Home of the African Cuisines</span>
-      <p>Management Portal – For Authorized Staff Only</p>
+  <div class="login-container">
+    <div class="logo">🍽️ S</div>
+    <h2>Sarriette Admin</h2>
+    <div class="subtitle">Restaurant Management Portal</div>
+
+    <div class="error-msg" id="errorMsg">
+      <span id="errorText">Invalid username or password.</span>
     </div>
-  </div>
-  <div class="login-right">
-    <div class="login-box">
-      <a class="login-logo" href="#">S</a>
-      <p class="login-subtitle"><i class="fas fa-lock"></i> Admin Portal — Secure Login</p>
 
-      <div class="error-msg" id="errorMsg"><i class="fas fa-exclamation-circle"></i> <span id="errorText">Invalid credentials.</span></div>
+    <div class="input-group">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Enter your username" autocomplete="off">
+    </div>
 
-      <form id="loginForm">
-        <div class="form-group">
-          <label>Username</label>
-          <div class="input-wrap">
-            <i class="fas fa-user"></i>
-            <input type="text" id="username" placeholder="Enter your username" required autocomplete="username"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <div class="input-wrap">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password"/>
-            <button type="button" class="show-pw" id="showPw"><i class="fas fa-eye"></i></button>
-          </div>
-        </div>
-        <button type="submit" class="btn-login" id="loginBtn">
-          <i class="fas fa-sign-in-alt"></i> Sign In to Dashboard
-        </button>
-      </form>
-      <div class="back-link">
-        <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Restaurant Website</a>
-      </div>
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter your password">
+    </div>
+
+    <button onclick="login()">Sign In to Dashboard</button>
+
+    <div class="back-link">
+      <a href="../sarriette/index.html">← Back to Restaurant Website</a>
+    </div>
+
+    <div class="info">
+      Demo credentials: admin / admin123
     </div>
   </div>
 
   <script>
-    document.getElementById('showPw').addEventListener('click', function() {
-      const pw = document.getElementById('password');
-      const icon = this.querySelector('i');
-      if (pw.type === 'password') {
-        pw.type = 'text';
-        icon.className = 'fas fa-eye-slash';
-      } else {
-        pw.type = 'password';
-        icon.className = 'fas fa-eye';
-      }
-    });
-
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('loginBtn');
-      const err = document.getElementById('errorMsg');
-      err.style.display = 'none';
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-
+    async function login() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('errorMsg');
+      const errorText = document.getElementById('errorText');
 
-      try {
-        const res = await fetch('login.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
-        });
-        const data = await res.json();
-        if (data.success) {
-          window.location.href = 'dashboard.html';
-        } else {
-          err.style.display = 'block';
-          document.getElementById('errorText').textContent = data.message || 'Invalid username or password.';
-        }
-      } catch(ex) {
-        // Demo mode: accept demo/demo123
-        if (username === 'admin' && password === 'sarriette2024') {
-          sessionStorage.setItem('sarriette_admin', JSON.stringify({ username, name: 'Restaurant Admin', role: 'superadmin' }));
-          window.location.href = 'dashboard.html';
-        } else {
-          err.style.display = 'block';
-          document.getElementById('errorText').textContent = 'Login failed. Use admin / sarriette2024 for demo.';
-        }
+      if (!username || !password) {
+        errorText.innerText = 'Please enter both username and password.';
+        errorDiv.style.display = 'block';
+        return;
       }
 
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In to Dashboard';
+      try {
+        const response = await fetch('login.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: username, password: password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Store admin info in session storage
+          sessionStorage.setItem('admin_name', data.name);
+          window.location.href = 'dashboard.html';
+        } else {
+          errorText.innerText = data.message || 'Invalid username or password.';
+          errorDiv.style.display = 'block';
+        }
+      } catch (error) {
+        // Fallback for demo - if PHP not working
+        if (username === 'admin' && password === 'admin123') {
+          sessionStorage.setItem('admin_name', 'Administrator');
+          window.location.href = 'dashboard.html';
+        } else {
+          errorText.innerText = 'Login failed. Use admin / admin123';
+          errorDiv.style.display = 'block';
+        }
+      }
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('password').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        login();
+      }
     });
   </script>
 </body>
